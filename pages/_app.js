@@ -14,14 +14,14 @@ const components = {
   Hero: Hero
 };
  
-storyblokInit({
-  accessToken: process.env.STORYBLOK_API_TOKEN,
-  use: [apiPlugin],
-  apiOptions: {
-    region: "us",
-  },
-  components
-});
+// storyblokInit({
+//   accessToken: process.env.STORYBLOK_API_TOKEN,
+//   use: [apiPlugin],
+//   apiOptions: {
+//     region: "us",
+//   },
+//   components
+// });
  
 function MyApp({ Component, pageProps }) {
   return <Component {...pageProps} />
