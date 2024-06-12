@@ -5,7 +5,6 @@ import {
   StoryblokComponent,
 } from "@storyblok/react";
 import Layout from "../components/Layout";
-import { customGetStoryblokApi } from "../lib/customGetStoryblokApi";
 
 export default function Home({ story }) {
   story = useStoryblokState(story);
@@ -23,10 +22,11 @@ export default function Home({ story }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getStaticProps({ params, locale, preview }) {
   let slug = "home";
   let sbParams = {
-    version: "draft", // or 'published'
+    version: preview ? "draft" : "published",
+    language: locale
   };
 
   const storyblokApi = getStoryblokApi();
