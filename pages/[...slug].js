@@ -8,27 +8,24 @@ import {
 import { customGetStoryblokApi } from "../lib/customGetStoryblokApi";
 
 
-export default function Page({ story, locales, locale, defaultLocale, preview }) {
-  story = useStoryblokState(story, {
-    language: locale
-  });
+export default function Page({ story, preview }) {
+  story = useStoryblokState(story);
   return (
     <div >
       <Head>
         <title>{story ? story.name : "My Site"}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Layout locales={locales} locale={locale} defaultLocale={defaultLocale}>
-        <StoryblokComponent blok={story.content} locale={locale} />
+      <Layout>
+        <StoryblokComponent blok={story.content} />
       </Layout>
     </div>
   );
 }
-export async function getStaticProps({ params, locale, preview }) {
+export async function getStaticProps({ params, preview }) {
   let slug = params.slug ? params.slug.join("/") : "home";
   let sbParams = {
     version: preview ? "draft" : "published",
-    language: locale
   };
   const storyblokApi = getStoryblokApi();
   let { data } = await storyblokApi.get(`cdn/stories/${slug}`, sbParams);
