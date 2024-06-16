@@ -5,10 +5,8 @@ import {
   getStoryblokApi,
   StoryblokComponent,
 } from "@storyblok/react";
-import { customGetStoryblokApi } from "../lib/customGetStoryblokApi";
 
-
-export default function Page({ story, preview }) {
+export default function Page({ story }) {
   story = useStoryblokState(story);
   return (
     <div >
@@ -22,10 +20,10 @@ export default function Page({ story, preview }) {
     </div>
   );
 }
-export async function getStaticProps({ params, preview }) {
+export async function getStaticProps({ params }) {
   let slug = params.slug ? params.slug.join("/") : "home";
   let sbParams = {
-    version: preview ? "draft" : "published",
+    version: "draft",
   };
   const storyblokApi = getStoryblokApi();
   let { data } = await storyblokApi.get(`cdn/stories/${slug}`, sbParams);
@@ -33,7 +31,6 @@ export async function getStaticProps({ params, preview }) {
     props: {
       story: data ? data.story : false,
       key: data ? data.story.id : false,
-      preview: preview || false
     },
     revalidate: 3600,
   };
@@ -41,8 +38,9 @@ export async function getStaticProps({ params, preview }) {
 export async function getStaticPaths({  }) {
   const storyblokApi = getStoryblokApi();
   let { data } = await storyblokApi.get("cdn/links/", {
-    version: 'published'
+    version: 'draft'
   });
+  
   let paths = [];
   Object.keys(data.links).forEach((linkKey) => {
     if (data.links[linkKey].is_folder || data.links[linkKey].slug === "home") {
