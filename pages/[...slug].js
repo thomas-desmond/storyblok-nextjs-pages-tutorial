@@ -9,7 +9,7 @@ import {
 export default function Page({ story }) {
   story = useStoryblokState(story);
   return (
-    <div >
+    <div>
       <Head>
         <title>{story ? story.name : "Storyblok & Next.js"}</title>
         <link rel="icon" href="/favicon.ico" />
@@ -20,10 +20,10 @@ export default function Page({ story }) {
     </div>
   );
 }
-export async function getStaticProps({ params }) {
+export async function getStaticProps({ params, preview }) {
   let slug = params.slug ? params.slug.join("/") : "home";
   let sbParams = {
-    version: "draft",
+    version: preview ? "draft" : "published",
   };
   const storyblokApi = getStoryblokApi();
   let { data } = await storyblokApi.get(`cdn/stories/${slug}`, sbParams);
@@ -35,12 +35,12 @@ export async function getStaticProps({ params }) {
     revalidate: 3600,
   };
 }
-export async function getStaticPaths(){
+export async function getStaticPaths({ preview }) {
   const storyblokApi = getStoryblokApi();
   let { data } = await storyblokApi.get("cdn/links/", {
-    version: "draft"
+    version: preview ? "draft" : "published",
   });
-  
+
   let paths = [];
   Object.keys(data.links).forEach((linkKey) => {
     if (data.links[linkKey].is_folder || data.links[linkKey].slug === "home") {
@@ -50,7 +50,6 @@ export async function getStaticPaths(){
     let splittedSlug = slug.split("/");
 
     paths.push({ params: { slug: splittedSlug } });
-
   });
   return {
     paths: paths,
