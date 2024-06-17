@@ -12,7 +12,7 @@ export default function Home({ story }) {
   return (
     <div>
       <Head>
-        <title>Create Next App</title>
+        <title>Storyblok & Next.js</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
