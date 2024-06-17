@@ -53,11 +53,6 @@ const Navigation = () => {
                 Recipes
               </a>
             </Link>
-            <Link legacyBehavior href="/blog">
-              <a className="text-xl font-medium text-gray-500 hover:text-gray-900">
-                Blog
-              </a>
-            </Link>
           </div>
         </div>
       </div>
@@ -112,14 +107,6 @@ const Navigation = () => {
                       {/* <!-- Heroicon name: outline/chart-bar --> */}
                       <span className="ml-3 text-base font-medium text-gray-900">
                         Recipes
-                      </span>
-                    </a>
-                  </Link>
-                  <Link legacyBehavior href="/blog">
-                    <a className="-m-3 p-3 flex items-center rounded-md hover:bg-gray-50">
-                      {/* <!-- Heroicon name: outline/cursor-click --> */}
-                      <span className="ml-3 text-base font-medium text-gray-900">
-                        Blog
                       </span>
                     </a>
                   </Link>
