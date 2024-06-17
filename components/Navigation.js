@@ -1,8 +1,9 @@
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 const Navigation = () => {
   const [openMenu, setOpenMenu] = useState(false);
- 
+
   return (
     <div className="relative bg-white border-b-2 border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -10,16 +11,12 @@ const Navigation = () => {
           <div className="flex justify-start lg:w-0 lg:flex-1">
             <Link legacyBehavior href="/">
               <a>
-                <span className="sr-only">Storyblok</span>
-                <img
-                  className="h-20 w-auto sm:h-10 hidden sm:block"
-                  src='https://a.storyblok.com/f/88751/251x53/0d3909fe96/storyblok-primary.png'
-                  alt="Storyblok"
-                />
-                <img
-                  className="h-20 w-auto sm:h-10 sm:hidden"
-                  src='https://a.storyblok.com/f/88751/92x106/835caf912a/storyblok-logo.png'
-                  alt="Storyblok"
+                <Image
+                  className="hidden sm:block"
+                  src="/logo.png"
+                  alt="Recipes"
+                  height={75}
+                  width={75}
                 />
               </a>
             </Link>
@@ -51,28 +48,20 @@ const Navigation = () => {
             </button>
           </div>
           <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0 space-x-10">
-            <Link legacyBehavior href="/about">
-              <a className="text-base font-medium text-gray-500 hover:text-gray-900">
-                
-                About
+            <Link legacyBehavior href="/recipes">
+              <a className="text-xl font-medium text-gray-500 hover:text-gray-900">
+                Recipes
               </a>
             </Link>
             <Link legacyBehavior href="/blog">
-              <a className="text-base font-medium text-gray-500 hover:text-gray-900">
-                
+              <a className="text-xl font-medium text-gray-500 hover:text-gray-900">
                 Blog
-              </a>
-            </Link>
-            <Link legacyBehavior href="/services">
-              <a className="text-base font-medium text-gray-500 hover:text-gray-900">
-                
-                Services
               </a>
             </Link>
           </div>
         </div>
       </div>
- 
+
       {/* <!--
         Mobile menu, show/hide based on mobile menu state.
       --> */}
@@ -82,10 +71,12 @@ const Navigation = () => {
             <div className="pt-5 pb-6 px-5">
               <div className="flex items-center justify-between">
                 <div>
-                  <img
-                    className="h-8 w-auto"
-                    src="https://a.storyblok.com/f/88751/92x106/835caf912a/storyblok-logo.png"
-                    alt="Storyblok"
+                  <Image
+                    className="hidden sm:block"
+                    src="/logo.png"
+                    alt="Recipes"
+                    height={50}
+                    width={50}
                   />
                 </div>
                 <div className="-mr-2">
@@ -120,8 +111,7 @@ const Navigation = () => {
                     <a className="-m-3 p-3 flex items-center rounded-md hover:bg-gray-50">
                       {/* <!-- Heroicon name: outline/chart-bar --> */}
                       <span className="ml-3 text-base font-medium text-gray-900">
-                        
-                        About
+                        Recipes
                       </span>
                     </a>
                   </Link>
@@ -129,16 +119,7 @@ const Navigation = () => {
                     <a className="-m-3 p-3 flex items-center rounded-md hover:bg-gray-50">
                       {/* <!-- Heroicon name: outline/cursor-click --> */}
                       <span className="ml-3 text-base font-medium text-gray-900">
-                        
                         Blog
-                      </span>
-                    </a>
-                  </Link>
-                  <Link legacyBehavior href="/services">
-                    <a className="-m-3 p-3 flex items-center rounded-md hover:bg-gray-50">
-                      <span className="ml-3 text-base font-medium text-gray-900">
-                        
-                        Services
                       </span>
                     </a>
                   </Link>
@@ -151,5 +132,5 @@ const Navigation = () => {
     </div>
   );
 };
- 
+
 export default Navigation;
