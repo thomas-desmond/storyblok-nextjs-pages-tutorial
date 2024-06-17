@@ -20,10 +20,10 @@ export default function Page({ story }) {
     </div>
   );
 }
-export async function getStaticProps({ params }) {
+export async function getStaticProps({ params, preview }) {
   let slug = params.slug ? params.slug.join("/") : "home";
   let sbParams = {
-    version: "draft",
+    version: preview ? "draft" : "published",
   };
   const storyblokApi = getStoryblokApi();
   let { data } = await storyblokApi.get(`cdn/stories/${slug}`, sbParams);
