@@ -35,10 +35,10 @@ export async function getStaticProps({ params, preview }) {
     revalidate: 3600,
   };
 }
-export async function getStaticPaths({  }) {
+export async function getStaticPaths({ preview }) {
   const storyblokApi = getStoryblokApi();
   let { data } = await storyblokApi.get("cdn/links/", {
-    version: 'draft'
+    version: preview ? "draft" : "published"
   });
   
   let paths = [];
