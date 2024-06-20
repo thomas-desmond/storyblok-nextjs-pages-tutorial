@@ -20,10 +20,10 @@ export default function Page({ story }) {
     </div>
   );
 }
-export async function getStaticProps({ params }) {
+export async function getStaticProps({ params, preview }) {
   let slug = params.slug ? params.slug.join("/") : "home";
   let sbParams = {
-    version: "draft",
+    version: preview ? "draft" : "published",
   };
   const storyblokApi = getStoryblokApi();
   let { data } = await storyblokApi.get(`cdn/stories/${slug}`, sbParams);
@@ -35,10 +35,10 @@ export async function getStaticProps({ params }) {
     revalidate: 3600,
   };
 }
-export async function getStaticPaths() {
+export async function getStaticPaths({ preview }) {
   const storyblokApi = getStoryblokApi();
   let { data } = await storyblokApi.get("cdn/links/", {
-    version: "draft",
+    version: preview ? "draft" : "published",
   });
 
   let paths = [];

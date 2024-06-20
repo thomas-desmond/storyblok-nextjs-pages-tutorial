@@ -22,10 +22,10 @@ export default function Home({ story }) {
   );
 }
 
-export async function getStaticProps({}) {
+export async function getStaticProps({preview}) {
   let slug = "home";
   let sbParams = {
-    version: "draft" ,
+    version: preview ? "draft" : "published",
   };
 
   const storyblokApi = getStoryblokApi();
